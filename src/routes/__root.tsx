@@ -1,26 +1,30 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <div className="mt-6">
+    <>
+      <SiteHeader />
+      <main className="min-h-screen flex items-center justify-center container-x pt-32">
+        <div className="max-w-xl text-center">
+          <p className="label-eyebrow">(404)</p>
+          <h1 className="font-display text-6xl md:text-8xl mt-4">Lost in the floorplan.</h1>
+          <p className="mt-6 text-muted-foreground">
+            The page you're looking for has been moved, retired, or never existed.
+          </p>
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex mt-10 items-center text-sm border border-foreground/30 px-6 py-3 rounded-full hover:bg-foreground hover:text-background transition-colors"
           >
-            Go home
+            Return home →
           </Link>
         </div>
-      </div>
-    </div>
+      </main>
+      <SiteFooter />
+    </>
   );
 }
 
@@ -29,14 +33,21 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Studio M — Interiors for high-performance brands" },
+      {
+        name: "description",
+        content:
+          "Studio M designs innovative interiors for retail, workplace and hospitality businesses across Asia-Pacific.",
+      },
+      { name: "author", content: "Studio M" },
+      { property: "og:title", content: "Studio M — Interiors for high-performance brands" },
+      {
+        property: "og:description",
+        content:
+          "We design environments where experience and performance are inseparable.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -65,5 +76,13 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  return <Outlet />;
+  return (
+    <>
+      <SiteHeader />
+      <main>
+        <Outlet />
+      </main>
+      <SiteFooter />
+    </>
+  );
 }
