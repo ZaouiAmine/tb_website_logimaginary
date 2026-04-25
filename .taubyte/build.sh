@@ -1,10 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-export NODE_ENV=production
-
 npm ci
-npm run build
+NODE_ENV=production npm run build
 
 mkdir -p /out
 cp -r dist/client/* /out/
